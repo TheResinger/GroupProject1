@@ -72,7 +72,7 @@ function start()
          {
             var ranWord = wordList[Math.floor(Math.random() * wordCount)];
             wordListRandom.push(ranWord);
-            $("#textDisplay").append($("<span>",{"text": ranWord.toUpperCase() + " "}));
+            $("#textDisplay").append($("<span>",{"text": ranWord + " "}));
          }
          textDisplay.firstChild.classList.add("highlightedWord")
       } 
