@@ -1,104 +1,136 @@
 var textDisplay = document.querySelector("#textDisplay");
-var input = document.querySelector("#input-field");
+var input = document.querySelector("#inputField");
 var currentWord = 0;
 var correct = 0;
 var word = [];
 var wordList = [];
-var wordListFiltered = [];
+var wordListRandom = [];
+var wordCount = 25;
+var topicSelected = false;
+var userTopic = "";
+var words = 100;
 
-
-
-var queryURL = "https://api.datamuse.com/words?ml=breakfast&max=100";
-$.ajax({
-   url : queryURL,
-   method : 'GET'
-}).then(function(response){
-   var results = response;
-   //--------------------Generate Word Array from API-------------------------
-   for(var i = 0; i < results.length; i++)
-   {
-      if(results[i].word.includes(" "))
-      { }
-      else
+$(document).on("click", ".wordCount", function(){
+   console.log($(this).attr('value'));
+   $("span").removeClass("selected");
+   $(this).addClass("selected");
+   wordCount = $(this).attr('value');
+   console.log(wordCount);
+   
+});
+if(topicSelected === false)
+{
+   $("#textDisplay").append($("<h1>",{"text": "Please enter a topic"}));
+   $("#input").on("click",function(event){
+      event.preventDefault();
+      userTopic = ($("#inputField").val());
+      console.log(userTopic);
+      $("#inputField").val("");
+      topicSelected = true;
+      console.log(topicSelected);
+      start();
+   });
+}
+function start()
+{
+   console.log("text");
+   var queryURL = "https://api.datamuse.com/words?ml=" + userTopic + "&max=200";
+   console.log(queryURL);
+   $.ajax({
+      url : queryURL,
+      method : 'GET'
+   }).then(function(response){
+      var results = response;
+      //--------------------Generate Word Array from API-------------------------
+      for(var i = 0; i < results.length; i++)
       {
-         word = results[i].word
-         wordList.push(word);
+         if(results[i].word.indexOf(" ") >= 0)
+         {
+            console.log("includes space")
+         }
+         else
+         {
+            console.log("Does not Include Space");
+            word = results[i].word;
+            wordList.push(word);
+         }
       }
-   }
-   //-------------------------------------Reset function for the game starting---------------------------------------
-   function reset(){
-      currentWord = 0;
-      correct = 0;
-      $("#textDisplay").empty();
-      showText();
-      input.value = "";
-      input.className = '';
-      textDisplay.style.display = 'block';
-   }
-   //-------------------------Places words from the word list into the DOM ----------------------------
-   function showText()
-   {
-      wordList.forEach(word => {
-         var span = document.createElement('span');
-         span.innerHTML = word + ' ';
-         textDisplay.appendChild(span);
-      })
-      textDisplay.firstChild.classList.add("highlightedWord")
-   } 
-   //Checking user typing
-   input.addEventListener('keydown', event => {
-      //check user keydowns between the letters a and z
-      if(currentWord < wordList.length)
-      {
-         inputFieldClass();
+      //-------------------------------------Reset function for the game starting---------------------------------------
+      function reset(){
+         currentWord = 0;
+         correct = 0;
+         $("#textDisplay").empty();
+         showText();
+         input.value = "";
+         input.className = '';
+         textDisplay.style.display = 'block';
       }
-      function inputFieldClass()
+      //-------------------------Places words from the word list into the DOM ----------------------------
+      function showText()
       {
-         if(event.key >= 'a' && event.key <= 'z')
+         for(var i = 0; i < wordCount; i++)
          {
-            var inputSlice = input.value + event.key;
-            var currentWordSlice = wordList[currentWord].slice(0,inputSlice.length);
-            console.log(currentWordSlice);
-            input.className = inputSlice === currentWordSlice ? '' : 'wrong';
+            var ranWord = wordList[Math.floor(Math.random() * wordCount)];
+            wordListRandom.push(ranWord);
+            $("#textDisplay").append($("<span>",{"text": ranWord.toUpperCase() + " "}));
          }
-         else if(event.key === 'Backspace')
+         textDisplay.firstChild.classList.add("highlightedWord")
+      } 
+      //Checking user typing
+      input.addEventListener('keydown', event => {
+         //check user keydowns between the letters a and z
+         if(currentWord < wordListRandom.length)
          {
-            var inputSlice = event.ctrlKey ? '' : input.value.slice(0, input.value.length -1);
-            var currentWordSlice = wordList[currentWord].slice(0, inputSlice.length);
-            console.log(currentWordSlice);
-            input.className = inputSlice === currentWordSlice ? '' : 'wrong';
+            inputFieldClass();
          }
-         else if(event.key === ' ')
+         function inputFieldClass()
          {
-            input.className = "";
-         }
-      };
-      if(event.key === " ")
-      {
-         event.preventDefault();
-         if(input.value !== " ")
-         {
-            if (currentWord < wordList.length -1)
+            if(event.key >= 'a' && event.key <= 'z')
             {
-               if(input.value === wordList[currentWord])
+               var inputSlice = input.value + event.key;
+               var currentWordSlice = wordListRandom[currentWord].slice(0,inputSlice.length);
+               console.log(currentWordSlice);
+               input.className = inputSlice === currentWordSlice ? '' : 'wrong';
+            }
+            else if(event.key === 'Backspace')
+            {
+               var inputSlice = event.ctrlKey ? '' : input.value.slice(0, input.value.length -1);
+               var currentWordSlice = wordListRandom[currentWord].slice(0, inputSlice.length);
+               console.log(currentWordSlice);
+               input.className = inputSlice === currentWordSlice ? '' : 'wrong';
+            }
+            else if(event.key === ' ')
+            {
+               input.className = "";
+            }
+         };
+         if(event.key === " ")
+         {
+            event.preventDefault();
+            if(input.value !== " ")
+            {
+               if (currentWord < wordListRandom.length - 1)
                {
-                  textDisplay.childNodes[currentWord].classList.add('correct');
-                  correct += wordList[currentWord].length + 1;
+                  if(input.value === wordListRandom[currentWord])
+                  {
+                     textDisplay.childNodes[currentWord].classList.add('correct');
+                     correct += wordListRandom[currentWord].length + 1;
+                  }
+                  else
+                  {
+                     textDisplay.childNodes[currentWord].classList.add("wrong");
+                  }
+                  textDisplay.childNodes[currentWord + 1].classList.add('highlightedWord');
                }
-               else
+               else if(currentWord === wordListRandom.length - 1)
                {
                   textDisplay.childNodes[currentWord].classList.add("wrong");
                }
-               textDisplay.childNodes[currentWord + 1].classList.add('highlightedWord');
             }
-            else if(currentWord === wordList.length - 1)
-            {
-               textDisplay.childNodes[currentWord].classList.add("wrong");
-            }
+            input.value = "";
+            currentWord++;
          }
-         input.value = "";
-         currentWord++;
-      }
-   });
-   reset();
-}); 
+      });
+      reset();
+   }); 
+}
