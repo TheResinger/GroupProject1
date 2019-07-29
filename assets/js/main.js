@@ -14,6 +14,8 @@ $.ajax({
    method : 'GET'
 }).then(function(response){
    var results = response;
+   console.log(results);
+   
    //--------------------Generate Word Array from API-------------------------
    for(var i = 0; i < results.length; i++)
    {
