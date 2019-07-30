@@ -27,21 +27,50 @@ var startTime = 0;
 var database = firebase.database();
 var name = "";
 var user = null;
-// var lwpm = [];
+var lwpm = [];
 var lname = [];
 var lacc = [];
 
 
-
-
-database.ref(`leaderboard`).on("child_added", function(snapshot){
-   var lwpm = database.ref(`leaderboard`).orderByChild('wordsPerMinute');
-   // lwpm.push(snapshot.val().wordsPerMinute);
-   // lname.push(snapshot.val().name);
-   // lacc.push(snapshot.val().Accuracy);
-   console.log(lwpm);
-   // console.log(lname);
-   // console.log(lacc);
+database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function(snapshot) {
+   lname = [];
+   lwpm = [];
+   lacc = [];
+   snapshot.forEach(function(child) {
+      lwpm.push(child.val().wordsPerMinute);
+      // console.log("TCL: lwpm", lwpm)
+      lname.push(child.val().name);
+      // console.log("TCL: lname", lname)
+      lacc.push(child.val().Accuracy);
+      // console.log("TCL: lacc", lacc)
+});
+   rlname = [];
+   rlwpm = [];
+   rlacc = [];
+   rlname = lname.reverse();
+   // console.log("TCL: rlname", rlname)
+   rlwpm = lwpm.reverse();
+   // console.log("TCL: rlwpm", rlwpm)
+   rlacc = lacc.reverse();
+   // console.log("TCL: rlacc", rlacc)
+   $("#leaderboard").empty();
+      for(var i = 1; i < rlname.length; i++)
+      {
+         var newRow = $("<div>",{"class":"row"}).append(
+            $("<div>",{"class":"col-md-2 text-right","text":i + " | "}),
+            $("<div>",{"class":"col-md-2 text-left","text":rlname[i]}),
+            $("<div>",{"class":"col-md-4 text-center","text":rlwpm[i] + " WPM"}),
+            $("<div>",{"class":"col-md-4 text-center","text":rlacc[i] + "%"}),
+         );
+         $("#leaderboard").append(newRow);
+      }
+});
+$(document).on("click", ".wordCount", function () {
+   console.log($(this).attr('value'));
+   $("span").removeClass("selected");
+   $(this).addClass("selected");
+   wordCount = $(this).attr('value');
+   // console.log(wordCount);
 });
 
 if (topicSelected === false) {
@@ -53,11 +82,12 @@ if (topicSelected === false) {
       console.log(userTopic);
       $("#inputField").val("");
       topicSelected = true;
-      console.log(topicSelected);
+      // console.log(topicSelected);
       start()
    });
 }
 function start() {
+   // appendLeaderboard();
    var queryURL = "https://api.datamuse.com/words?ml=" + userTopic + "&max=200";
    console.log(queryURL);
    $.ajax({
@@ -81,6 +111,7 @@ function start() {
             // console.log("Does not Include Space");
             word = results[i].word;
             wordList.push(word);
+            // console.log(wordList);
          }
       }
       $(document).on("click", ".wordCount", function () {
@@ -88,7 +119,7 @@ function start() {
          $("span").removeClass("selected");
          $(this).addClass("selected");
          wordCount = $(this).attr('value');
-         console.log(wordCount);
+         // console.log(wordCount);
          showText();
       });
       //-------------------------------------Reset function for the game starting---------------------------------------
@@ -111,7 +142,7 @@ function start() {
          randomWords = [];
          for (var i = 0; i < wordCount; i++) {
             var ranWord = wordList[Math.floor(Math.random() * wordList.length)];
-            console.log(ranWord);
+            // console.log(ranWord);
             if (wordList[wordList.length - 1] !== ranWord || wordList[wordList.length - 1] === undefined) {
                randomWords.push(ranWord);
             }
