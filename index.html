@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-md-4 text-center" id="wordCount"><span class="wordCount" value="5">5</span> / <span value="25" class="wordCount selected">25</span> / <span value="50" class="wordCount">50</span> / <span value="75" class="wordCount">75</span> / <span value="100" class="wordCount">100</span></div>
+        <div class="col-md-4 text-center" id="wordCount"><span class="wordCount" value="10">10</span> / <span value="25" class="wordCount selected">25</span> / <span value="50" class="wordCount">50</span> / <span value="100" class="wordCount">100</span> / <span value="250" class="wordCount">250</span></div>
         <div class="col-md-4"></div>
     </div>
     <div id="textDisplay" class="text-center"></div>
@@ -25,12 +25,14 @@
     <br>
     <br>
     <br>
+    <div class="row">
+        <div class="col-md-4 text-center">NAME</div>
+        <div class="col-md-4 text-center">WORDS PER MINUTE</div>
+        <div class="col-md-4 text-center">ACCURACY</div>
+    </div>
+    <hr>
     <div id="leaderboard">
-        <div class="row">
-            <div class="col-md-4 text-center">NAME</div>
-            <div class="col-md-4 text-center">WORDS PER MINUTE</div>
-            <div class="col-md-4 text-center">ACCURACY</div>
-        </div>
+
     </div>
     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
