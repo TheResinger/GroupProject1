@@ -233,9 +233,12 @@ function start() {
                $("#inputField").val("");
                showResult();
             }
+            input.value = "";
+            currentWord++;
          }
       });
      
       reset();
    });
+
 }

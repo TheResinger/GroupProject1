@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Group Poject 1</title>
@@ -13,12 +20,26 @@
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
+    <nav>
+        <div class="nav-wrapper teal">
+            <a href="#" class="brand-logo">Project</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h4 id="wpm">WPM</h4>
+
+    <div id="textDisplay"> <h1>Hello!!!</h1></div>
+
     <div class="row">
         <div class="col-md-4 text-center" id="wordCount"><span class="wordCount" value="10">10</span> / <span value="25" class="wordCount selected">25</span> / <span value="50" class="wordCount">50</span> / <span value="100" class="wordCount">100</span> / <span value="250" class="wordCount">250</span></div>
         <div class="col-md-4"></div>
     </div>
-    <div id="textDisplay" class="text-center"></div>
+    <!-- <div id="textDisplay" class="text-center"></div>
     <form id="textBox" class="text-center">
         <input type="text" id="inputField">
     </form>
@@ -32,11 +53,27 @@
     </div>
     <hr>
     <div id="leaderboard">
-
-    </div>
+        <div class="row">
+            <div class="col-md-4 text-center">NAME</div>
+            <div class="col-md-4 text-center">WORDS PER MINUTE</div>
+            <div class="col-md-4 text-center">ACCURACY</div>
+        </div>
+    </div> -->
     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="assets/js/main.js"></script>
+
+    <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="input-field" type="text" data-length="10">
+              <label for="input_text">Input text</label>
+            </div>
+          </div>
+        </form>
+      </div>
 </body>
+
 </html>
