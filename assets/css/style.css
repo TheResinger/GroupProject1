@@ -18,3 +18,20 @@ margin: 0 auto;
 }
 
 
+.highlightedWord
+{
+    color: rgb(223, 108, 0);
+}
+.wrong
+{
+    color: red;
+}
+.correct
+{
+    color: green;
+}
+.selected
+{
+    border-bottom: 1px solid #000;
+    color: green;
+}
