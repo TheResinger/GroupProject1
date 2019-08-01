@@ -21,7 +21,7 @@
     <div id='container'>
         <!--NAVBAR ** We need to work on the toggle icon (with JS) that pops when width decreases ** -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html"></a>
+            <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,13 +29,10 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="average.html">Average</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="improve.html">Improve your typing?</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
@@ -43,59 +40,11 @@
                 </span>
             </div>
         </nav>
-        <br>
-        <br>
-
-        <!--SCORE AND AVERAGE STATS TO POP UP WHENEVER THE GAME ENDS-->
-        <div id="scores-container">
-            <div id="scores-div">
-                <div>
-                    <h2 id="scores-text">TYPING SPEED TEST</h2>
-                </div>
-                <form><p></p></form>
-                <div class="scores" id="accuracy"><span id='span-scores'>00</span> <span id='span-scores'>00</span>
-                </div>
-                <div class="scores" id="accuracy"><span id='scores-def' id="words-min">WORDS / MIN</span> <span
-                        id='scores-def' id="accuracy">% ACCURACY</span></div>
-                <br>
-                <div class="scores" id="seconds">00</div>
-                <div class="scores" id="accuracy"><span id='scores-sec'> SECONDS </span></div>
-            </div>
-        </div>
 
 
-        <!--MAIN CONTAINER-->
-        <div class="container">
-            <h2 class="display-3">Get the amount of words</h2>
-
-            <div id="wordCount"><span value="25" class="wordCount selected">25</span><span value="50"
-                    class="wordCount">50</span><span value="75" class="wordCount">75</span><span value="100"
-                    class="wordCount">100</span></div>
-         
-            <p class="lead" id="textDisplay"></p>
-            <br>
-
-            <input type="text" id="inputField">
-            <br>
-            <br>
-
-            <div id ="submit-btn">
-                <input id="input" class="submit-restart" value="Restart" type="submit">
-            </div>
-    
-        </div>
-
-   
-        <br>
-        <hr>
-        <!--TABLE TO PUSH DATA FROM FIREBASE-->
-        <div id="leaderboard">
-            <div class="row">
-                <div class="col-md-4 text-center">NAME</div>
-                <div class="col-md-4 text-center">WORDS PER MINUTE</div>
-                <div class="col-md-4 text-center">ACCURACY</div>
-            </div>
-        </div>
+<div id="canvas-container">
+        <canvas id="myChart" width="100px" height="50px"></canvas>
+</div>
 
         <!--FOOTER-->
         <div class="footer">
@@ -103,6 +52,8 @@
         </div>
 
     </div>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

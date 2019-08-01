@@ -1,0 +1,190 @@
+body {
+    background-image: url('https://thewallpaper.co//wp-content/uploads/2017/10/video-peace-gaming-computer-cool-images-gamer-poster-free-vectors-game-tablet-lg-wallpapers.jpg');
+    box-sizing: border-box;
+}
+#form {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+.container{
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    margin-top: 40px;
+    text-align: right;
+    /* border: 1px solid #ffffff; */
+}
+.display-3{
+    font-size: 15px;    
+}
+.navbar{
+    background:#ffffff;
+    font-size:18px;
+}
+.navbar-text{
+    margin-right: 130px;
+    font-size: 22px;
+    color: #000000;
+}
+.lead{
+    margin: 20px;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgb(0,0,0);
+    background: linear-gradient(148deg, rgba(24,55,42,0.4) 10%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 66%, rgba(24,55,42,0.4) 100%);
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#inputField{
+    width: 60%;
+    margin-left: 20px;
+    font-size: 36px;
+    border-width: 0 0 0.1px;
+    border-color: rgb(94, 204, 147);
+    background: none;
+    outline: 0px;
+    color: #ffffff;
+    margin-left: 300px;
+}
+input:focus {
+    border-color: green
+  }
+.submit-restart{
+    background-color: #54b175;
+    border: none;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    font-size: 18 px;
+    cursor: pointer;
+    padding: 8px 16px 8px 16px;
+    border-radius: 5px;
+    
+}
+.submit-restart:hover {
+    background-color: #31864f;
+}
+.container-data{
+    width: 80%;
+    margin: 0 auto;
+}
+.highlightedWord
+{
+    color: rgb(0, 223, 74);
+}
+.wrong
+{
+    color: red;
+}
+.correct
+{
+    color: rgb(0, 107, 149);
+}
+.selected
+{
+    border-bottom: 1px solid #000;
+    color: green;
+}
+
+#scores-container{
+    width: 300px;;
+    margin: 0 auto;
+    border: 1px solid #edfff3;
+    box-shadow: 0px 0px 5px 3px #80ffaf;
+    padding: 20px;
+    align-content: center;
+    display: none; /* DISPLAY NONE */
+    margin-top: 150px;
+}
+#scores-text{
+    text-shadow: 0px 0px 2px 2px #70ffa2;
+    color: #b3ffcd;
+    letter-spacing: 2px;
+    word-spacing: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: thin;
+    text-align: center;
+}
+.scores{
+    color: #b3ffcd;
+    font-size: 48px;
+    text-shadow: 0px 0px 2px #91ffb8;
+    font-weight: thin;
+}
+#span-scores{
+    margin-bottom:10px;
+    margin-right:25px;
+    margin-left: 40px;
+    text-align: center;
+}
+#seconds{
+    margin-left: 105px;
+}
+#scores-sec{
+    margin-left: 90px;
+    font-size: 18px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+#scores-def{
+    font-size: 18px;
+    margin-left: 6px;
+  }
+  hr{
+      border: 0.5px solid #b3ffcd;
+      width:75%;
+  }
+  #textDisplay{
+    color: #dbffe7;
+    font-size: 30px;
+    margin: 0 auto;
+  }
+  h1{
+      font-size:24px;
+      font-weight: thin;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+  }
+  h2{
+      text-align: right;
+      color: rgb(186, 245, 186);
+  }
+  .wordCount{
+      margin-left: 23px;
+      font-size:30px;
+      margin-bottom: 200px;
+  }
+  .selected{
+      border-bottom: solid 1px green;
+  }
+
+#leaderboard{
+    color:white;
+    font-size: 16px;
+}
+
+  /*PAGE 2 */
+
+#chartContainer{
+    margin: 0 auto;
+    margin-top: 100px;
+    color: white;
+}
+
+#canvas-container{
+    width:600px;
+    height:300px;
+}
