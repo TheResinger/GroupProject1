@@ -1,23 +1,27 @@
-#wpm {
-    text-decoration: underline;
-    margin-left: auto;
-    margin-right: 20px;
-    width: fit-content;
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
+main {
+    flex: 1 0 auto;
+}
 #textDisplay {
     border: 1px solid black;
-    width: 80%;
-    margin: 0 auto;
-    height: 40vh;
+    padding: 10px 10px;
+    height: 330px;
 }
 
-#input-field {
-width: 40%;
-margin: 0 auto;
+#textBox 
+{
+    text-align: center;
 }
-
-
+.word
+{
+    font-size: 25px;
+    font-weight: bold;
+}
 .highlightedWord
 {
     color: rgb(223, 108, 0);
@@ -34,4 +38,10 @@ margin: 0 auto;
 {
     border-bottom: 1px solid #000;
     color: green;
+}
+
+
+#hname,#hacc,#hwpm
+{
+    border-bottom: 1px solid #000;
 }
