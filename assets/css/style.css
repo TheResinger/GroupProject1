@@ -1,83 +1,44 @@
 body {
-    background-image: url('https://thewallpaper.co//wp-content/uploads/2017/10/video-peace-gaming-computer-cool-images-gamer-poster-free-vectors-game-tablet-lg-wallpapers.jpg');
-    box-sizing: border-box;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-image: url("stripes.png");
 }
-#form {
-    width: 50%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
+.nav-wrapper{
+    margin-bottom: 10px;
 }
-.container{
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
-    margin-top: 40px;
-    text-align: right;
-    /* border: 1px solid #ffffff; */
-}
-.display-3{
-    font-size: 15px;    
-}
-.navbar{
-    background:#ffffff;
-    font-size:18px;
-}
-.navbar-text{
-    margin-right: 130px;
-    font-size: 22px;
-    color: #000000;
-}
-.lead{
-    margin: 20px;
+main {
+    flex: 1 0 auto;
 }
 .footer {
     position: fixed;
-    left: 0;
     bottom: 0;
-    width: 100%;
-    background: rgb(0,0,0);
-    background: linear-gradient(148deg, rgba(24,55,42,0.4) 10%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 66%, rgba(24,55,42,0.4) 100%);
-    color: white;
+    width: 100%; 
+    color: rgb(0, 0, 0);
     text-align: center;
-    padding-top: 10px;
-}
-
-#inputField{
-    width: 60%;
-    margin-left: 20px;
-    font-size: 36px;
-    border-width: 0 0 0.1px;
-    border-color: rgb(94, 204, 147);
-    background: none;
-    outline: 0px;
-    color: #ffffff;
-    margin-left: 300px;
-}
-input:focus {
-    border-color: green
+    padding-bottom: 8px;
   }
-.submit-restart{
-    background-color: #54b175;
-    border: none;
-    color: rgb(255, 255, 255);
-    text-align: center;
-    text-decoration: none;
-    font-size: 18 px;
-    cursor: pointer;
-    padding: 8px 16px 8px 16px;
-    border-radius: 5px;
+#textDisplay {
+    padding: 10px 10px;
+    height: 230px;
+    border-radius: 15px;
+    box-shadow: 1px 2px 10px 2px #888888;
+    margin-top: 10px;
+    background-color: rgba(255, 255, 254, 0.5);
     
 }
-.submit-restart:hover {
-    background-color: #31864f;
+#textBox 
+{
+    text-align: center;
 }
-.container-data{
-    width: 80%;
-    margin: 0 auto;
+.word
+{
+    font-size: 25px;
+    font-weight: bold;
 }
 .highlightedWord
 {
-    color: rgb(0, 223, 74);
+    color: rgb(223, 108, 0);
 }
 .wrong
 {
@@ -85,106 +46,76 @@ input:focus {
 }
 .correct
 {
-    color: rgb(0, 107, 149);
+    color: rgb(126, 128, 0);
 }
 .selected
 {
+    color: rgb(10, 172, 147);
+}
+#hname,#hacc,#hwpm
+{
     border-bottom: 1px solid #000;
-    color: green;
 }
-
-#scores-container{
-    width: 300px;;
-    margin: 0 auto;
-    border: 1px solid #edfff3;
-    box-shadow: 0px 0px 5px 3px #80ffaf;
-    padding: 20px;
-    align-content: center;
-    display: none; /* DISPLAY NONE */
-    margin-top: 150px;
-}
-#scores-text{
-    text-shadow: 0px 0px 2px 2px #70ffa2;
-    color: #b3ffcd;
-    letter-spacing: 2px;
-    word-spacing: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: thin;
-    text-align: center;
-}
-.scores{
-    color: #b3ffcd;
-    font-size: 48px;
-    text-shadow: 0px 0px 2px #91ffb8;
-    font-weight: thin;
-}
-#span-scores{
-    margin-bottom:10px;
-    margin-right:25px;
-    margin-left: 40px;
-    text-align: center;
-}
-#seconds{
-    margin-left: 105px;
-}
-#scores-sec{
-    margin-left: 90px;
-    font-size: 18px;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 5px;
-    text-align: left;
-  }
-#scores-def{
-    font-size: 18px;
-    margin-left: 6px;
-  }
-  hr{
-      border: 0.5px solid #b3ffcd;
-      width:75%;
-  }
-  #textDisplay{
-    color: #dbffe7;
-    font-size: 30px;
-    margin: 0 auto;
-  }
-  h1{
-      font-size:24px;
-      font-weight: thin;
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-  }
-  h2{
-      text-align: right;
-      color: rgb(186, 245, 186);
-  }
-  .wordCount{
-      margin-left: 23px;
-      font-size:30px;
-      margin-bottom: 200px;
-  }
-  .selected{
-      border-bottom: solid 1px green;
-  }
-
-#leaderboard{
-    color:white;
+.row{
+    margin-top: 28px;
     font-size: 16px;
 }
+#inputField{
+    margin-top: 25px;
+    width: 300px;
+}
+.wordCount{
+    margin-right: 10px;
+}
+.wordCount:hover{
+    font-size:20px;
+    transition: font-size 2s;
+    color: rgb(0, 0, 0); 
+}
+h2{
+    margin-top: 8px;
+    font-size: 24px;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(122, 122, 122);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color:  transparent transparent rgb(122, 122, 122) transparent;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 0.8;
+  }
+  .col-m4{
+    margin-top: 25px;
+  }
 
-  /*PAGE 2 */
-
-#chartContainer{
+  #chart{
+    width: 60%;
     margin: 0 auto;
-    margin-top: 100px;
-    color: white;
-}
-
-#canvas-container{
-    width:600px;
-    height:300px;
-}
+    margin-top: 50px;
+  }

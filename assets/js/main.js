@@ -7,7 +7,7 @@ var firebaseConfig = {
    storageBucket: "",
    messagingSenderId: "95363253229",
    appId: "1:95363253229:web:a40fc7e1d73eef2c"
-};
+ };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -32,14 +32,21 @@ var lname = [];
 var lacc = [];
 
 
-database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function (snapshot) {
+database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function(snapshot) {
    var WPMgroups =  {};
    var maxgroup = 0;
    lname = [];
    lwpm = [];
    lacc = [];
-   snapshot.forEach(function (child) {
+   snapshot.forEach(function(child) {
       lwpm.push(child.val().wordsPerMinute);
+      // console.log("TCL: lwpm", lwpm)
+      lname.push(child.val().name);
+      // console.log("TCL: lname", lname)
+      lacc.push(child.val().Accuracy);
+      // console.log("TCL: lacc", lacc)
+
+      //-------CHART BEGINS-------
       var wpm = child.val().wordsPerMinute;
       var wpmgroup = Math.floor(wpm/10)
       if(!WPMgroups[wpmgroup*10]){
@@ -52,11 +59,6 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
          maxgroup = wpmgroup;
       }
 
-      // console.log("TCL: lwpm", lwpm)
-      lname.push(child.val().name);
-      // console.log("TCL: lname", lname)
-      lacc.push(child.val().Accuracy);
-      // console.log("TCL: lacc", lacc)
    });
 
    var xaxis = [];
@@ -65,7 +67,7 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
    for(var i = 0; i<= maxgroup; i++){
       var lowerbound = i*10;
       var upperbound = ((i+1)*10)-1;
-      xaxis.push(lowerbound + "-" + upperbound);
+      xaxis.push(lowerbound);
       if(WPMgroups[i*10]){
          values.push(WPMgroups[i*10])
       }
@@ -81,7 +83,7 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
         datasets: [
           {
             label: "Population (millions)",
-            backgroundColor: "#ffffff",
+            backgroundColor: "rgb(10, 172, 147)",
             data: values
           }
         ]
@@ -90,58 +92,60 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
         legend: { display: false },
         title: {
           display: true,
-          text: 'DPM'
-        }
+          text: 'Global Stats',
+          fontSize: 32,
+          fontFamily: 'Calibri',
+       }
       }
+      
   });
-   debugger;
+  //-------CHART ENDS--------
+
    rlname = [];
    rlwpm = [];
    rlacc = [];
    rlname = lname.reverse();
-   // console.log("TCL: rlname", rlname)
    rlwpm = lwpm.reverse();
-   // console.log("TCL: rlwpm", rlwpm)
    rlacc = lacc.reverse();
-   // console.log("TCL: rlacc", rlacc)
    $("#leaderboard").empty();
-   for (var i = 1; i < rlname.length; i++) {
-      var newRow = $("<div>", { "class": "row" }).append(
-         $("<div>", { "class": "col-md-2 text-right", "text": i + " | " }),
-         $("<div>", { "class": "col-md-2 text-left", "text": rlname[i] }),
-         $("<div>", { "class": "col-md-4 text-center", "text": rlwpm[i] + " WPM" }),
-         $("<div>", { "class": "col-md-4 text-center", "text": rlacc[i] + "%" }),
-      );
-      $("#leaderboard").append(newRow);
-   }
+   var newRow = $("<tr>").append(
+      $("<th>",{"class":"center","scope":"col","text":"RANK"}),
+      $("<th>",{"class":"center","scope":"col","text":"NAME"}),
+      $("<th>",{"class":"center","scope":"col","text":"WPM"}),
+      $("<th>",{"class":"center","scope":"col","text":"ACCURACY"}),
+   )
+   $("#leaderboard").append(newRow);
+      for(var i = 0; i < rlname.length; i++)
+      {
+         var newRow = $("<tr>").append(
+            $("<td>",{"class":"center","text":i + 1}),
+            $("<td>",{"class":"center","text":rlname[i]}),
+            $("<td>",{"class":"center","text":rlwpm[i] + " WPM"}),
+            $("<td>",{"class":"center","text":rlacc[i] + "%"}),
+         )
+         $("#leaderboard").append(newRow);
+      }
 });
 $(document).on("click", ".wordCount", function () {
-   console.log($(this).attr('value'));
    $("span").removeClass("selected");
    $(this).addClass("selected");
    wordCount = $(this).attr('value');
-   // console.log(wordCount);
 });
 
 if (topicSelected === false) {
-   $("#textDisplay").append($("<h1>", { "text": "Please enter a topic" }));
-   $("#textBox").append($("<input>", { "id": "input", "value": "Enter", "type": "submit" }));
+   $("#instructions").append($("<h2>", { "text": "PLEASE ENTER A TOPIC","class": "center"}));
+   $("#textBox").append($("<input>",{"id" : "input", "value" : "Enter","type" : "submit","class":"hide"}));
    $("#input").on("click", function (event) {
       event.preventDefault();
       userTopic = ($("#inputField").val());
-      console.log(userTopic);
       $("#inputField").val("");
       topicSelected = true;
-      // console.log(topicSelected);
       start()
    });
 }
 
-
 function start() {
-   // appendLeaderboard();
    var queryURL = "https://api.datamuse.com/words?ml=" + userTopic + "&max=200";
-   console.log(queryURL);
    $.ajax({
       url: queryURL,
       method: 'GET'
@@ -167,11 +171,9 @@ function start() {
          }
       }
       $(document).on("click", ".wordCount", function () {
-         console.log($(this).attr('value'));
          $("span").removeClass("selected");
          $(this).addClass("selected");
          wordCount = $(this).attr('value');
-         // console.log(wordCount);
          showText();
       });
       //-------------------------------------Reset function for the game starting---------------------------------------
@@ -180,32 +182,33 @@ function start() {
          correct = 0;
          input.value = "";
          input.className = '';
-         textDisplay.style.display = 'block';
+         // textDisplay.style.display = 'block';
          startTime = 0;
          $("#input").remove();
          $("#submitInfo").remove();
          $("#textDisplay").empty();
-         $("#textBox").append($("<input>", { "id": "input", "value": "Restart", "type": "submit" }));
+         $("#instructions").empty();
+         $("#textBox").append($("<input>",{"id" : "input", "value" : "Restart","type" : "submit","class":"hide"}));
          showText();
       }
       //-------------------------Places words from the word list into the DOM ----------------------------
       function showText() {
          $("#textDisplay").empty();
+         $("#instructions").empty();
          randomWords = [];
          for (var i = 0; i < wordCount; i++) {
             var ranWord = wordList[Math.floor(Math.random() * wordList.length)];
-            // console.log(ranWord);
             if (wordList[wordList.length - 1] !== ranWord || wordList[wordList.length - 1] === undefined) {
                randomWords.push(ranWord);
             }
          }
-         randomWords.forEach(function (word) {
-            $("#textDisplay").append($("<span>", { "text": word + " " }));
+         randomWords.forEach(function(word){
+            $("#textDisplay").append($("<span>",{"text": word + " ","class":"word"}));
          });
          textDisplay.firstChild.classList.add("highlightedWord")
       }
       function showResult() {
-
+         console.log("showing result")
          var words, minute, accuracy;
          words = correct / 5;
          minute = (Date.now() - startTime) / 1000 / 60;
@@ -213,18 +216,19 @@ function start() {
          randomWords.forEach(e => (totalKeys += e.length + 1));
          accuracy = Math.floor((correct / totalKeys) * 100);
          var wpm = Math.floor(words / minute);
-         $("#textDisplay").prepend($("<h1>", { "id": "stats", "text": `WPM : ${wpm} | ACC : ${accuracy}` }))
-         $("#stats").append($("<p>", { "text": "Enter your name for the leaderboard." }))
+         $("#stats").text(`WPM : ${wpm} | ACC : ${accuracy}`);
+         $("#instructions").append($("<h2>",{"text" : "Enter your name for the leaderboard.","class": "center"}))
          $("#input").remove();
-         $("#textBox").append($("<input>", { "id": "submitInfo", "value": "Enter", "type": "submit" }));
-         $(document).on("click", "#submitInfo", function (event) {
+         $("#textBox").append($("<input>",{"id" : "submitInfo", "value" : "Enter","type" : "submit","class":"hide"}));
+         $(document).on("click","#submitInfo", function(event){
             event.preventDefault();
-            if (($("#inputField").val().trim() !== "")) {
+            if(($("#inputField").val().trim() !== ""))
+            {
                name = $("#inputField").val().trim();
                user = {
-                  name: name,
-                  wordsPerMinute: wpm,
-                  Accuracy: accuracy,
+                  name : name,
+                  wordsPerMinute : wpm,
+                  Accuracy : accuracy,
                };
                database.ref().child(`leaderboard/`).push(user);
             }
@@ -241,22 +245,20 @@ function start() {
             if (event.key >= 'a' && event.key <= 'z') {
                var inputSlice = input.value + event.key;
                var currentWordSlice = randomWords[currentWord].slice(0, inputSlice.length);
-               // console.log(currentWordSlice);
                input.className = inputSlice === currentWordSlice ? '' : 'wrong';
-            } else if (event.key === 'Backspace') {
+            }else if (event.key === 'Backspace') {
                var inputSlice = event.ctrlKey ? '' : input.value.slice(0, input.value.length - 1);
                var currentWordSlice = randomWords[currentWord].slice(0, inputSlice.length);
-               // console.log(currentWordSlice);
                input.className = inputSlice === currentWordSlice ? '' : 'wrong';
             } else if (event.key === ' ') {
-               input.className = "";
+               input.className = '';
             }
          };
          //Generates a time-stamp of when the user starts typing
          if (currentWord === 0 && input.value === "") {
             startTime = Date.now();
          }
-         // Check the inputed word the user typed out and assign the styles depending on if its correct or not.
+         // Check the inputed word the user typed out and assign the styles depening on if its correct or not.
          if (event.key === ' ') {
             event.preventDefault();
             if (input.value !== "") {
@@ -268,30 +270,29 @@ function start() {
                      textDisplay.childNodes[currentWord].classList.add("wrong");
                   }
                   textDisplay.childNodes[currentWord + 1].classList.add('highlightedWord');
+                  currentWord++;
                } else if (currentWord === randomWords.length - 1) {
                   textDisplay.childNodes[currentWord].classList.add("wrong");
                   showResult();
+                  currentWord++;
                }
                input.value = "";
-               currentWord++;
             }
             // Check if it is the last word and input word is correct show the result
-         } else if (currentWord === randomWords.length - 1) {
-            if (input.value + event.key === randomWords[currentWord]) {
+         } 
+         else if (currentWord === randomWords.length - 1) 
+         {
+            if (input.value + event.key === randomWords[currentWord])
+            {
                textDisplay.childNodes[currentWord].classList.add('correct');
                correct += randomWords[currentWord].length;
                currentWord++;
-               $("#inputField").val("");
                showResult();
             }
-            input.value = "";
-            currentWord++;
          }
       });
-
-
      
       reset();
-});
+   });
 
 }
