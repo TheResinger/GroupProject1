@@ -104,7 +104,7 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
       //    $("<div>", { "class": "col-md-4 text-center", "text": rlacc[i] + "%" }),
       // );
       var newRow = $("<tr>", { "class": "row" }).append(
-         $("<td>", { "align": "center", "text": i + " | " }),
+         $("<td>", { "align": "center", "text": i }),
          $("<td>", { "align": "center", "text": rlname[i] }),
          $("<td>", { "align": "center", "text": rlwpm[i] + " WPM" }),
          $("<td>", { "align": "center", "text": rlacc[i] + "%" }),
@@ -147,7 +147,7 @@ database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function 
          }
       }
    });
-   
+
 });
 $(document).on("click", ".wordCount", function () {
    console.log($(this).attr('value'));
@@ -158,7 +158,7 @@ $(document).on("click", ".wordCount", function () {
 });
 
 if (topicSelected === false) {
-   $("#textDisplay").append($("<h1>", { "text": "Please enter a topic" }));
+   $("#textDisplay").append($("<h1>", { "text": "Please enter a topic below" }));
    $("#textBox").append($("<input>", { "id": "input", "value": "Enter", "type": "submit" }));
    $("#input").on("click", function (event) {
       event.preventDefault();
