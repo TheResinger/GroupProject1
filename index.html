@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- Compiled and minified CSS -->
@@ -18,38 +19,43 @@
 </head>
 
 <body>
+    <!--NAVBAR-->
     <nav>
         <div class="nav-wrapper teal">
             <div class="container">
-                <a href="#" class="brand-logo">Typing Speed Test</a>
+                <a href="index.html" class="brand-logo">Typing Speed Test</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="#">About</a></li>
+                    <li><a href="stats.html">Global Stats</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+    <!-- Container to place numbers and User's Average -->
     <div class="row container">
-        <div class="col m4 left-align" id="wordCount"><span class="wordCount" value="10">10</span> / <span value="25" class="wordCount selected">25</span> / <span value="50" class="wordCount">50</span> / <span value="75" class="wordCount">75</span></div>
+        <div class="col m4 left-align" id="wordCount"><span class="wordCount" value="10">10</span> <span value="25"
+                class="wordCount selected">25</span> <span value="50" class="wordCount">50</span> <span value="75"
+                class="wordCount">75</span></div>
         <div class="col m4"></div>
-        <div class="col m4 right-align" id="stats">WPM : XX | ACC : XXX %</div>
+        <div class="col m4 right-align" id="stats">WPM : XX<span></span> | ACC : XXX<span></span> %</div>
     </div>
+    <!--Container to place the random words obtained from the API-->
     <div id="textDisplay" class="center container"></div>
     <form id="textBox" class="center container">
-        <input autocomplete="off" type="text" id="inputField"> 
+        <div class="tooltip">
+            <span class="tooltiptext">Type any word</span> <input autocomplete="off" type="text" id="inputField">
+        </div>
     </form>
     <br>
     <div id="instructions"></div>
     <br>
-    <div class="row container">
-        <div class="col m8">
-            <div>
-                <table class="" id="leaderboard">
-                </table>
-            </div>
-        </div>
-    </div>
+    <!-- Table to place the users & scores-->
+    <div id="my-table">
+    <table id="leaderboard">       
 
+    </table>
+</div>
+
+    <!--Footer-->
     <footer class="footer">
         <div class="container">
           <div class="row">
