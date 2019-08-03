@@ -7,7 +7,7 @@ var firebaseConfig = {
    storageBucket: "",
    messagingSenderId: "95363253229",
    appId: "1:95363253229:web:a40fc7e1d73eef2c"
- };
+};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -32,44 +32,67 @@ var lname = [];
 var lacc = [];
 
 
-database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function(snapshot) {
+
+database.ref('leaderboard').orderByChild("wordsPerMinute").on('value', function (snapshot) {
    lname = [];
    lwpm = [];
    lacc = [];
-   snapshot.forEach(function(child) {
+   snapshot.forEach(function (child) {
       lwpm.push(child.val().wordsPerMinute);
+      // console.log("TCL: lwpm", lwpm)
       lname.push(child.val().name);
+      // console.log("TCL: lname", lname)
       lacc.push(child.val().Accuracy);
-});
+      // console.log("TCL: lacc", lacc)
+
+
+   });
+
+
+
+   // -----------------------chart ends --------------
+
    rlname = [];
    rlwpm = [];
    rlacc = [];
    rlname = lname.reverse();
+   // console.log("TCL: rlname", rlname)
    rlwpm = lwpm.reverse();
+   // console.log("TCL: rlwpm", rlwpm)
    rlacc = lacc.reverse();
+   // console.log("TCL: rlacc", rlacc)
    $("#leaderboard").empty();
-   var newRow = $("<tr>").append(
-      $("<th>",{"class":"center","scope":"col","text":"RANK"}),
-      $("<th>",{"class":"center","scope":"col","text":"NAME"}),
-      $("<th>",{"class":"center","scope":"col","text":"WPM"}),
-      $("<th>",{"class":"center","scope":"col","text":"ACCURACY"}),
-   )
-   $("#leaderboard").append(newRow);
-      for(var i = 0; i < rlname.length; i++)
-      {
-         var newRow = $("<tr>").append(
-            $("<td>",{"class":"center","text":i + 1}),
-            $("<td>",{"class":"center","text":rlname[i]}),
-            $("<td>",{"class":"center","text":rlwpm[i] + " WPM"}),
-            $("<td>",{"class":"center","text":rlacc[i] + "%"}),
-         )
-         $("#leaderboard").append(newRow);
-      }
+   var newRow = $("<tr>", { "class": "row" }).append(
+      $("<th>", { "class": "", "text": "User" }),
+      $("<th>", { "class": "", "text": "Name" }),
+      $("<th>", { "class": "", "text": "WPM" }),
+      $("<th>", { "class": "", "text": "Accuracy" }),
+   );
+   $("#leaderboard").append(newRow)
+   for (var i = 0; i < rlname.length; i++) {
+      // var newRow = $("<div>", { "class": "row" }).append(
+      //    $("<div>", { "class": "col-md-2 text-right", "text": i + " | " }),
+      //    $("<div>", { "class": "col-md-2 text-left", "text": rlname[i] }),
+      //    $("<div>", { "class": "col-md-4 text-center", "text": rlwpm[i] + " WPM" }),
+      //    $("<div>", { "class": "col-md-4 text-center", "text": rlacc[i] + "%" }),
+      // );
+      var newRow = $("<tr>", { "class": "row" }).append(
+         $("<td>", { "align": "center", "text": i + 1 + " | " }),
+         $("<td>", { "align": "center", "text": rlname[i] }),
+         $("<td>", { "align": "center", "text": rlwpm[i] + " WPM" }),
+         $("<td>", { "align": "center", "text": rlacc[i] + "%" }),
+      );
+      $("#leaderboard").append(newRow);
+   }
+
+   
 });
 $(document).on("click", ".wordCount", function () {
+   console.log($(this).attr('value'));
    $("span").removeClass("selected");
    $(this).addClass("selected");
    wordCount = $(this).attr('value');
+   // console.log(wordCount);
 });
 
 if (topicSelected === false) {
@@ -90,6 +113,7 @@ function start() {
       method: 'GET'
    }).then(function (response) {
       var results = response;
+      $("#stats").text(`WPM : XX | ACC : XXX %`)
       //--------------------Generate Word Array from API-------------------------
       for (var i = 0; i < results.length; i++) {
          if (results[i].word.indexOf(" ") >= 0) {
