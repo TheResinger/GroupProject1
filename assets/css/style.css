@@ -19,13 +19,17 @@ main {
     padding-bottom: 8px;
   }
 #textDisplay {
-    padding: 10px 10px;
+    padding: 25px 20px;
     height: 230px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 2px #888888;
     margin-top: 10px;
     background-color: rgba(255, 255, 254, 0.5);
     
+}
+
+#my-table{
+    padding: 25px 20px;
 }
 #textBox 
 {
@@ -69,8 +73,11 @@ main {
 }
 .wordCount:hover{
     font-size:20px;
-    transition: font-size 2s;
+    transition: font-size 1s;
     color: rgb(0, 0, 0); 
+}
+h1{
+    font-size: 28px;
 }
 h2{
     margin-top: 8px;
@@ -119,3 +126,10 @@ h2{
     margin: 0 auto;
     margin-top: 50px;
   }
+
+#my-table{
+    padding: 60px;
+}
+.space{
+
+}
