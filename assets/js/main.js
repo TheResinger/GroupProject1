@@ -107,7 +107,7 @@ if (topicSelected === false) {
    });
 }
 function start() {
-   var queryURL = "https://api.datamuse.com/words?ml=" + userTopic + "&max=200";
+   var queryURL = "https://cors-anywhere.herokuapp.com/https://api.datamuse.com/words?ml=" + userTopic + "&max=200";
    $.ajax({
       url: queryURL,
       method: 'GET'
