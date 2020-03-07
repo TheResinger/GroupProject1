@@ -34,6 +34,10 @@ npm install
 
 ### Future Development
 
+### Deployment
+
+[Here is the link for the deployment of this app.](https://theresinger.github.io/TypingSpeedTest/)
+
 ## Application Use
 
 1. User selects how many words to type, and the topic.
