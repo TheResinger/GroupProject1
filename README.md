@@ -2,7 +2,7 @@
 
 ### Overview
 
-A web application designed to tets a users touch typing speed.
+A web application designed to test a users touch typing speed.
 
 ## Getting Started
 
