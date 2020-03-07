@@ -28,7 +28,7 @@ npm install
 
 ### Built With
 
-* [Bootstrap](https://handlebarsjs.com/) - Javascript Templating Engine
+* [Bootstrap](https://getbootstrap.com/) - CSS Template
 * [jQuery](https://jquery.com/) - Javascript Libray
 * [Firebase](https://firebase.google.com/) - Google cloud based app hosting.
 
