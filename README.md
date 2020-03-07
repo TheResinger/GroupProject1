@@ -1,18 +1,38 @@
 # Typing Speed Test
 
-## TODO
+### Overview
 
+A web application designed to tets a users touch typing speed.
 
+## Getting Started
 
-## Technologies Used
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. They will also give an overview of some of the app's functionality. 
 
-1. HTML
-2. CSS
-3. JavaScript
-4. jQuery
-5. Bootstrap
-6. Firebase
+### Installing
 
+Git clone the repository to your local machine:
+
+HTTPS: 
+```
+$ git clone https://github.com/TheResinger/TypingSpeedTest.git
+```
+SSH:
+```
+$ git clone git@github.com:TheResinger/TypingSpeedTest.git
+```
+
+Next, cd into the repository and run the command
+```
+npm install
+```
+
+### Built With
+
+* [Bootstrap](https://handlebarsjs.com/) - Javascript Templating Engine
+* [jQuery](https://jquery.com/) - Javascript Libray
+* [Firebase](https://firebase.google.com/) - Google cloud based app hosting.
+
+### Future Development
 
 ## Application Use
 
@@ -21,3 +41,7 @@
 3. User types the words displayed as fast as possible.
 4. Display the users words per minute.
 5. User enters their name to be added to the leaderboard.
+
+### Authors
+
+See the list of [contributors](https://github.com/TheResinger/TypingSpeedTest/graphs/contributors) who participated in this project along with individual commit history. 
